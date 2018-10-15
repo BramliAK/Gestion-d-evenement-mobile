@@ -32,7 +32,8 @@
         <activity android:name=".Main2Activity" />
         <activity android:name=".ResumeActivity" />
         <activity android:name=".seancesActivity" />
-        <activity android:name=".AvisActivity"></activity>
+        <activity android:name=".AvisActivity" />
+        <activity android:name=".Menu"></activity>
     </application>
 
 </manifest>
