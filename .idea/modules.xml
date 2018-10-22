@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gestion-d-evenement-mobile.iml" filepath="$PROJECT_DIR$/Gestion-d-evenement-mobile.iml" />
+      <module fileurl="file://D:\gi2\android\andoidapp\Gestion-d-evenement-mobile.iml" filepath="D:\gi2\android\andoidapp\Gestion-d-evenement-mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/andoidapp.iml" filepath="$PROJECT_DIR$/andoidapp.iml" />
       <module fileurl="file://C:\Users\maham\Desktop\Gestion-d-evenement-mobile\andoidapp.iml" filepath="C:\Users\maham\Desktop\Gestion-d-evenement-mobile\andoidapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\maham\Desktop\Gestion-d-evenement-mobile\app\app.iml" filepath="C:\Users\maham\Desktop\Gestion-d-evenement-mobile\app\app.iml" />
