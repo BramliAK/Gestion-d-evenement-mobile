@@ -1,6 +1,7 @@
 package com.example.ahmed.andoidapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.example.ahmed.andoidapp.R;
+import com.example.ahmed.andoidapp.ResumeActivity;
 import com.example.ahmed.andoidapp.model.Dateevents;
 import com.example.ahmed.andoidapp.model.Event;
 import com.example.ahmed.andoidapp.model.Localisations;
@@ -43,8 +46,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view ;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         view = mInflater.inflate(R.layout.event_row,parent,false);
-        // click listener here
-        return new MyViewHolder(view);
+        final MyViewHolder viewHolder = new MyViewHolder(view) ;
+
+        viewHolder.view_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(mContext, ResumeActivity.class);
+                // sending data process
+                i.putExtra("id",mData.get(viewHolder.getAdapterPosition()).getId());
+                i.putExtra("nom",mData.get(viewHolder.getAdapterPosition()).getNom());
+                i.putExtra("description",mData.get(viewHolder.getAdapterPosition()).getDescription());
+                i.putExtra("prix",mData.get(viewHolder.getAdapterPosition()).getPrix());
+                i.putExtra("image",mData.get(viewHolder.getAdapterPosition()).getImage());
+
+                mContext.startActivity(i);
+
+            }
+        });
+
+
+
+
+        return viewHolder;
     }
 
 
@@ -86,10 +110,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView tvname,tv_lieu,tvprix,tvcat;
         ImageView AnimeThumbnail;
-
+        LinearLayout view_container;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            view_container = itemView.findViewById(R.id.container);
             tvname = itemView.findViewById(R.id.rowname);
             tvprix = itemView.findViewById(R.id.prix);
             tv_lieu = itemView.findViewById(R.id.lieu);
