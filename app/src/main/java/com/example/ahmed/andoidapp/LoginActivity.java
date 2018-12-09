@@ -3,7 +3,9 @@ package com.example.ahmed.andoidapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,13 +32,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ahmed.andoidapp.sqlite.DatabaseContract;
+import com.example.ahmed.andoidapp.sqlite.DatabaseOpenHelper;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -48,7 +58,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    private DatabaseOpenHelper databaseOpenHelper;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -79,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
+        databaseOpenHelper = new DatabaseOpenHelper(this);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -98,23 +108,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 attemptLogin();
                 String URL="localhost:8081/api/dateevents";
-                JsonObjectRequest objectRequest =new JsonObjectRequest(
-                        Request.Method.GET,
-                        URL,
-                        null,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.e("rest request",response.toString());
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e("rest request","§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§!");
-                            }
-                        }
-                );
+
             }
         });
 
@@ -212,20 +206,60 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            //showProgress(true);
+           // mAuthTask = new UserLoginTask(email, password);
+            Log.i("email",email);
+            JSONObject obj= new JSONObject();
+            try {
+                obj.put("username",email);
+                obj.put("password",password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = "http://my-json-feed";
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST,"http://192.168.1.8:8081/api/authenticate",obj, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                                Log.i("ddd",response.opt("id_token").toString());
+                            insertItem(response.opt("id_token").toString());
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i("errrr","errrrrrrrrr");
+
+                        }
+                    });
+
+// Access the RequestQueue through your singleton class.
+            queue.add(jsonObjectRequest);
+            //queue.add(jsObjRequest);
+           // mAuthTask.execute((Void) null);
         }
     }
+    private void insertItem(String text) {
+        SQLiteDatabase database = databaseOpenHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseContract.User.columnText, text);
+        database.insert(DatabaseContract.User.tableName, null, values);
+    }
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("");
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
@@ -375,4 +409,3 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 }
-

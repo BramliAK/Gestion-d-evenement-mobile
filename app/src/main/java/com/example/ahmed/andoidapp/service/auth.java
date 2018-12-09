@@ -1,6 +1,7 @@
 package com.example.ahmed.andoidapp.service;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 /**
@@ -9,5 +10,5 @@ import com.android.volley.toolbox.Volley;
 
 public class auth {
 
-    //RequestQueue requestQueue= Volley.newRequestQueue(this);
+
 }

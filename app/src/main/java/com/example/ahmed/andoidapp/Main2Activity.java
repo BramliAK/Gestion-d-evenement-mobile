@@ -29,7 +29,7 @@ import java.util.List;
 
 public class Main2Activity extends AppCompatActivity  {
 
-    private String URL_JSON = "http://192.168.124.2:8081/api/evenementstype/Film";
+    private String URL_JSON = "http://192.168.1.6:8081/api/evenementstype/Film";
     private JsonArrayRequest ArrayRequest ;
     private RequestQueue requestQueue ;
     private List<Event> lstAnime = new ArrayList<>();

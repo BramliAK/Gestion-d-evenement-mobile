@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ahmed.andoidapp.sqlite.DatabaseOpenHelper;
 
 import org.json.JSONObject;
 
@@ -41,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imageButton1 ;
     private ImageButton imageButton2 ;
     Button button;
+    DatabaseOpenHelper myDb;
     TextView textview;
+    private Cursor cursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         this.b1=(Button)findViewById(R.id.button1);
         this.b2=(Button)findViewById(R.id.button2);
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button)findViewById(R.id.button9);
         this.imageButton1=(ImageButton)findViewById(R.id.imageButton2);
         this.imageButton2=(ImageButton)findViewById(R.id.imageButton3);
+        //cursor=myDb.getuser();
 /*
 
         RequestQueue queue = Volley.newRequestQueue(this);

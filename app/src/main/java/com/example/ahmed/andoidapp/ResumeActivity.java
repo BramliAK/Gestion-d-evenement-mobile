@@ -53,6 +53,11 @@ public class ResumeActivity extends AppCompatActivity {
         FragementResume fragobj = new FragementResume();
         fragobj.setArguments(bundle);
 
+        Bundle b = new Bundle();
+        b.putString("idff",description);
+        FragementSeance f=new FragementSeance();
+        f.setArguments(b);
+
         ViewPageAdapter adapter= new ViewPageAdapter(getSupportFragmentManager());
         adapter.AddFragment(fragobj ,"Resume");
         adapter.AddFragment(new FragementSeance(),"Seance");
