@@ -53,7 +53,6 @@ public class FragementSeance extends Fragment {
             view=inflater.inflate(R.layout.seance_fragement,container,false);
 
         myrv= (RecyclerView ) view.findViewById(R.id.crecylceview);
-       // textView=(TextView)view.findViewById(R.id.textView9);
 
         setRvadapter1(localisationslist);
         return view;
@@ -72,7 +71,6 @@ public class FragementSeance extends Fragment {
     }
 
     private void jsoncall() {
-        Log.i("dddddddddd",URL_JSON1);
         ArrayRequest1 = new JsonArrayRequest(URL_JSON1, new Response.Listener<JSONArray>() {
 
             @Override

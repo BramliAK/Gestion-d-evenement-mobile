@@ -1,6 +1,7 @@
 package com.example.ahmed.andoidapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.ahmed.andoidapp.MapsActivity;
 import com.example.ahmed.andoidapp.R;
+import com.example.ahmed.andoidapp.ResumeActivity;
 import com.example.ahmed.andoidapp.model.Localisations;
 import java.util.List;
 
@@ -36,8 +40,20 @@ public class RecycleViewAdapterSeance extends RecyclerView.Adapter<RecycleViewAd
 
         LayoutInflater mInflater = LayoutInflater.from(this.context);
         view = mInflater.inflate(R.layout.item_seance,parent,false);
-        MyViewHolder2 vHolder = new MyViewHolder2(view) ;
+        final MyViewHolder2 vHolder = new MyViewHolder2(view) ;
+        vHolder.view_container1.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent i = new Intent(context, MapsActivity .class);
+                // sending data process
+                i.putExtra("latitude",mData.get(vHolder.getAdapterPosition()).getLatitude());
+                i.putExtra("langitude",mData.get(vHolder.getAdapterPosition()).getLongitude());
+
+                context.startActivity(i);
+
+            }
+        });
 
 
 
@@ -51,6 +67,8 @@ public class RecycleViewAdapterSeance extends RecyclerView.Adapter<RecycleViewAd
         holder.rownamemap.setText(mData.get(position).getNomemplacement());
 
         holder.Emplacement.setText(mData.get(position).getEmplacement());
+        holder.largeur.setText(mData.get(position).getLatitude());
+        holder.longeur.setText(mData.get(position).getLongitude());
 
 
     }
@@ -65,6 +83,8 @@ public class RecycleViewAdapterSeance extends RecyclerView.Adapter<RecycleViewAd
 
         TextView Emplacement;
         TextView rownamemap;
+        TextView largeur;
+        TextView longeur;
 
         LinearLayout view_container1;
 
@@ -73,6 +93,8 @@ public class RecycleViewAdapterSeance extends RecyclerView.Adapter<RecycleViewAd
             view_container1 = itemView.findViewById(R.id.container1);
             rownamemap = itemView.findViewById(R.id.roo);
             Emplacement = itemView.findViewById(R.id.date);
+            largeur=itemView.findViewById(R.id.largeur);
+            longeur=itemView.findViewById(R.id.longuer);
         }
     }
 }

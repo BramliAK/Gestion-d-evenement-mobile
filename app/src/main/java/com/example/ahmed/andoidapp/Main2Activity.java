@@ -34,7 +34,6 @@ public class Main2Activity extends AppCompatActivity  {
     private RequestQueue requestQueue ;
     private List<Event> lstAnime = new ArrayList<>();
     private RecyclerView myrv ;
-    private String mJSONURLString = "http://192.168.124.2:8081/api/dateevents";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
