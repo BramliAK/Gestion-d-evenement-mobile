@@ -2,6 +2,7 @@ package com.example.ahmed.andoidapp;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,21 +19,25 @@ public class Menu extends AppCompatActivity {
 
     private DatabaseOpenHelper databaseOpenHelper;
     String text="null";
+
+    private Cursor getUser() {
+        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        return database.query(DatabaseContract.User.tableName,
+                null, null, new String[]{}, null, null, null);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        databaseOpenHelper = new DatabaseOpenHelper(this);
         this.indentifier=(Button)findViewById(R.id.button);
-        /*cursor=databaseOpenHelper.getuser();
+        cursor=getUser();
         if(cursor.getCount()==0){
-            Log.i("sql","0");
+            Log.i("cc","gg");
         }else{
-            Log.i("sql","1");
-        }*/
-        //cursor.moveToFirst();
-        //int index = cursor.getColumnIndex(DatabaseContract.User.columnText);
-       // String text = cursor.getString(index);
+            Log.i("cc",String.valueOf(cursor.getCount()));
+            this.indentifier.setText("Deconnecter");
+        }
 
         Log.i("token",text);
         this.indentifier.setOnClickListener(new View.OnClickListener() {
