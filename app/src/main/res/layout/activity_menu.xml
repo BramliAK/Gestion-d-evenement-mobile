@@ -7,63 +7,48 @@
     tools:context="com.example.ahmed.andoidapp.Menu">
 
 
-
-
         <Button
             android:id="@+id/button"
 
             android:layout_width="300dp"
             android:layout_height="65dp"
-            android:text="s'identifier"
             android:background="#6383f4"
+            android:text="s'identifier"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.191" />
+            app:layout_constraintVertical_bias="0.221" />
 
         <Button
             android:id="@+id/button1"
             android:layout_width="300dp"
             android:layout_height="65dp"
-            android:text="Accueil"
             android:background="#5071e7"
+            android:text="Accueil"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.37" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="300dp"
-            android:layout_height="65dp"
-            android:text="Créer Compte"
-            android:background="#395ddf"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555" />
+            app:layout_constraintVertical_bias="0.436" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="300dp"
             android:layout_height="65dp"
-            android:text="Contact"
             android:background="#2850df"
+            android:text="Contact"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.727" />
+            app:layout_constraintVertical_bias="0.667" />
 
         <Button
             android:id="@+id/button4"
