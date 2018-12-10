@@ -21,6 +21,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(SQLCreateTableArticles);
     }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion,
                           int newVersion) {
@@ -47,6 +49,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         Cursor cu=db.rawQuery("select * from "+DatabaseContract.User.tableName,null );
         return cu;
+    }
+    public Boolean deletetable(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("delete  from " + DatabaseContract.User.tableName);
+        return true;
     }
 }
 

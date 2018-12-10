@@ -32,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -240,12 +241,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         public void onResponse(JSONObject response) {
                                 Log.i("ddd",response.opt("id_token").toString());
                             insertItem(response.opt("id_token").toString());
+
+                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+
+                            startActivity(intent);
                         }
                     }, new Response.ErrorListener() {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i("errrr","errrrrrrrrr");
+                            Toast.makeText(LoginActivity.this, "erreur", (int) 0.5).show();
 
                         }
                     });

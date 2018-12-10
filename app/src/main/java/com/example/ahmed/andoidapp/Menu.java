@@ -34,19 +34,29 @@ public class Menu extends AppCompatActivity {
         cursor=getUser();
         if(cursor.getCount()==0){
             Log.i("cc","gg");
+
+            this.indentifier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(Menu.this,LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
         }else{
             Log.i("cc",String.valueOf(cursor.getCount()));
             this.indentifier.setText("Deconnecter");
+            this.indentifier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    databaseOpenHelper.deletetable();
+                    Intent intent=new Intent(Menu.this,MainActivity.class);
+
+                    startActivity(intent);
+                }
+            });
         }
 
         Log.i("token",text);
-        this.indentifier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Menu.this,LoginActivity.class);
 
-                startActivity(intent);
-            }
-        });
     }
 }
